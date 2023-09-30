@@ -32,12 +32,17 @@ namespace EventsAndDelegates
                             NotificationService.SendNotification(TypeOfNotificationSending.WithDeclaredDelegate);
                             break;
                         default:
-                            Console.WriteLine("Choose a valid option.");
+                            PrintWarningMessage();
                             break;
                     }
                 }
-                else { Console.WriteLine("Choose a valid option."); };
+                else { PrintWarningMessage(); };
             }
+        }
+
+        private static void PrintWarningMessage()
+        {
+            Console.WriteLine("Choose a valid option.");
         }
     }
 }
