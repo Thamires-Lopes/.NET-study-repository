@@ -1,34 +1,77 @@
 ﻿using EventsAndDelegates.Entities;
+using EventsAndDelegates.Enums;
 
 namespace EventsAndDelegates.Services
 {
     public class NotificationService
     {
-        public static void SendNotification()
+        public static void SendNotification(TypeOfNotificationSending typeOfNotificationSending)
         {
             var notification = CreateNotification();
 
             Console.WriteLine("Sending notification");
-            OnNotificationConfirmedGeneral(notification);
-            MockNotificationReceived(notification);
+            OnNotificationConfirmedGeneral(notification, typeOfNotificationSending);
+            MockNotificationReceived(notification, typeOfNotificationSending);
         }
 
-        private static void MockNotificationReceived(Notification notification)
+        private static void MockNotificationReceived(Notification notification, TypeOfNotificationSending typeOfNotificationSending)
         {
             Thread.Sleep(5000);
 
-            notification.OnNotificationReceived();
+            switch (typeOfNotificationSending)
+            {
+                case TypeOfNotificationSending.WithoutArgs:
+                    notification.OnNotificationReceived();
+                    break;
+                case TypeOfNotificationSending.WithArgs:
+                    var eventArgs = new NotificationReceivedEventArgs { TimeNotificationReceived = DateTime.Now };
+                    notification.OnNotificationReceivedWithArgs(eventArgs);
+                    break;
+                case TypeOfNotificationSending.WithDeclaredDelegate:
+                    break;
+                default:
+                    break;
+            }
         }
 
-        private static void OnNotificationConfirmedGeneral(Notification notification)
+        private static void OnNotificationConfirmedGeneral(Notification notification, TypeOfNotificationSending typeOfNotification)
         {
-            if (notification.IdTypeEmail == 1)
+            switch (typeOfNotification)
+            {
+                case TypeOfNotificationSending.WithoutArgs:
+                    OnNotificationConfirmedWithoutArgs(notification);
+                    break;
+                case TypeOfNotificationSending.WithArgs:
+                    OnNotificationConfirmedWithArgs(notification);
+                    break;
+                case TypeOfNotificationSending.WithDeclaredDelegate:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private static void OnNotificationConfirmedWithoutArgs(Notification notification)
+        {
+            if (notification.IdTypeNotification == (int)TypeOfNotification.FirstExample)
             {
                 notification.NotificationConfirmed += NotificationConfirmed;
             }
             else
             {
                 notification.NotificationConfirmed += NotificationConfirmed2;
+            }
+        }
+
+        private static void OnNotificationConfirmedWithArgs(Notification notification)
+        {
+            if (notification.IdTypeNotification == (int)TypeOfNotification.FirstExample)
+            {
+                notification.NotificationConfirmedWithArgs += NotificationConfirmedWithArgs;
+            }
+            else
+            {
+                notification.NotificationConfirmedWithArgs += NotificationConfirmedWithArgs2;
             }
         }
 
@@ -56,7 +99,7 @@ namespace EventsAndDelegates.Services
 
             }
 
-            return new Notification { Message = "Notification test", IdTypeEmail = value };
+            return new Notification { Message = "Notification test", IdTypeNotification = value };
         }
 
         private static void NotificationConfirmed(object? sender, EventArgs e)
@@ -68,6 +111,18 @@ namespace EventsAndDelegates.Services
         private static void NotificationConfirmed2(object? sender, EventArgs e)
         {
             Console.WriteLine("Notification type 2 received");
+            Environment.Exit(0);
+        }
+
+        private static void NotificationConfirmedWithArgs(object? sender, NotificationReceivedEventArgs eventArgs)
+        {
+            Console.WriteLine($"Notification type 1 received in {eventArgs.TimeNotificationReceived}");
+            Environment.Exit(0);
+        }
+
+        private static void NotificationConfirmedWithArgs2(object? sender, NotificationReceivedEventArgs eventArgs)
+        {
+            Console.WriteLine($"Notification type 2 received in {eventArgs.TimeNotificationReceived}");
             Environment.Exit(0);
         }
     }

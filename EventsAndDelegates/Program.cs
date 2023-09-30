@@ -1,4 +1,5 @@
-﻿using EventsAndDelegates.Services;
+﻿using EventsAndDelegates.Enums;
+using EventsAndDelegates.Services;
 
 namespace EventsAndDelegates
 {
@@ -7,22 +8,31 @@ namespace EventsAndDelegates
         static void Main()
         {
             Console.WriteLine("Choose option:");
-            Console.WriteLine("1 - Create Notifications");
+            Console.WriteLine("1 - Create Notifications without args");
+            Console.WriteLine("2 - Create Notifications with args");
 
             while (true)
             {
-                var key = Console.ReadKey();
+                var key = Console.ReadKey().KeyChar.ToString();
+                var converted = int.TryParse(key, out var type);
                 Console.WriteLine();
 
-                switch (key.KeyChar)
+                if (converted)
                 {
-                    case '1':
-                        NotificationService.SendNotification();
-                        break;
-                    default:
-                        Console.WriteLine("Choose an option.");
-                        break;
+                    switch (type)
+                    {
+                        case (int)TypeOfNotificationSending.WithoutArgs:
+                            NotificationService.SendNotification(TypeOfNotificationSending.WithoutArgs);
+                            break;
+                        case (int)TypeOfNotificationSending.WithArgs:
+                            NotificationService.SendNotification(TypeOfNotificationSending.WithArgs);
+                            break;
+                        default:
+                            Console.WriteLine("Choose an option.");
+                            break;
+                    }
                 }
+                else { Console.WriteLine("Choose a valid option."); };
             }
         }
     }
