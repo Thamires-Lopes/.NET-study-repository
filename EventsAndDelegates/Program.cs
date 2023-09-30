@@ -7,10 +7,7 @@ namespace EventsAndDelegates
     {
         static void Main()
         {
-            Console.WriteLine("Choose an option:");
-            Console.WriteLine("1 - Create Notifications without args.");
-            Console.WriteLine("2 - Create Notifications with args.");
-            Console.WriteLine("3 - Create Notifications with args and declared delegate.");
+            ShowMenu();
 
             while (true)
             {
@@ -32,15 +29,23 @@ namespace EventsAndDelegates
                             NotificationService.SendNotification(TypeOfNotificationSending.WithDeclaredDelegate);
                             break;
                         default:
-                            PrintWarningMessage();
+                            ShowWarningMessage();
                             break;
                     }
                 }
-                else { PrintWarningMessage(); };
+                else { ShowWarningMessage(); };
             }
         }
 
-        private static void PrintWarningMessage()
+        private static void ShowMenu()
+        {
+            Console.WriteLine("Choose an option:");
+            Console.WriteLine("1 - Create Notifications without args.");
+            Console.WriteLine("2 - Create Notifications with args.");
+            Console.WriteLine("3 - Create Notifications with args and declared delegate.");
+        }
+
+        private static void ShowWarningMessage()
         {
             Console.WriteLine("Choose a valid option.");
         }
