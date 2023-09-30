@@ -28,6 +28,8 @@ namespace EventsAndDelegates.Services
                     notification.OnNotificationReceivedWithArgs(eventArgs);
                     break;
                 case TypeOfNotificationSending.WithDeclaredDelegate:
+                    var eventArgsDelegate = new NotificationReceivedEventArgs { TimeNotificationReceived = DateTime.Now };
+                    notification.OnNotificationReceivedWithDelegate(eventArgsDelegate);
                     break;
                 default:
                     break;
@@ -45,6 +47,7 @@ namespace EventsAndDelegates.Services
                     OnNotificationConfirmedWithArgs(notification);
                     break;
                 case TypeOfNotificationSending.WithDeclaredDelegate:
+                    OnNotificationConfirmedWithDeclaredDelegate(notification);
                     break;
                 default:
                     break;
@@ -72,6 +75,18 @@ namespace EventsAndDelegates.Services
             else
             {
                 notification.NotificationConfirmedWithArgs += NotificationConfirmedWithArgs2;
+            }
+        }
+
+        private static void OnNotificationConfirmedWithDeclaredDelegate(Notification notification)
+        {
+            if (notification.IdTypeNotification == (int)TypeOfNotification.FirstExample)
+            {
+                notification.NotificationConfirmedDelegate += NotificationConfirmedWithDelegate;
+            }
+            else
+            {
+                notification.NotificationConfirmedDelegate += NotificationConfirmedWithDelegate2;
             }
         }
 
@@ -123,6 +138,18 @@ namespace EventsAndDelegates.Services
         private static void NotificationConfirmedWithArgs2(object? sender, NotificationReceivedEventArgs eventArgs)
         {
             Console.WriteLine($"Notification type 2 received in {eventArgs.TimeNotificationReceived}");
+            Environment.Exit(0);
+        }
+
+        private static void NotificationConfirmedWithDelegate(object? sender, NotificationReceivedEventArgs eventArgs)
+        {
+            Console.WriteLine($"Notification with delegate type 1 received in {eventArgs.TimeNotificationReceived}");
+            Environment.Exit(0);
+        }
+
+        private static void NotificationConfirmedWithDelegate2(object? sender, NotificationReceivedEventArgs eventArgs)
+        {
+            Console.WriteLine($"Notification with delegate type 2 received in {eventArgs.TimeNotificationReceived}");
             Environment.Exit(0);
         }
     }

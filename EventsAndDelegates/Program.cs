@@ -7,9 +7,10 @@ namespace EventsAndDelegates
     {
         static void Main()
         {
-            Console.WriteLine("Choose option:");
-            Console.WriteLine("1 - Create Notifications without args");
-            Console.WriteLine("2 - Create Notifications with args");
+            Console.WriteLine("Choose an option:");
+            Console.WriteLine("1 - Create Notifications without args.");
+            Console.WriteLine("2 - Create Notifications with args.");
+            Console.WriteLine("3 - Create Notifications with args and declared delegate.");
 
             while (true)
             {
@@ -27,8 +28,11 @@ namespace EventsAndDelegates
                         case (int)TypeOfNotificationSending.WithArgs:
                             NotificationService.SendNotification(TypeOfNotificationSending.WithArgs);
                             break;
+                        case (int)TypeOfNotificationSending.WithDeclaredDelegate:
+                            NotificationService.SendNotification(TypeOfNotificationSending.WithDeclaredDelegate);
+                            break;
                         default:
-                            Console.WriteLine("Choose an option.");
+                            Console.WriteLine("Choose a valid option.");
                             break;
                     }
                 }
