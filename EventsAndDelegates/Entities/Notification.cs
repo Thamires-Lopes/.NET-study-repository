@@ -2,9 +2,14 @@
 {
     public class Notification
     {
+        // Event without arguments
         public event EventHandler? NotificationConfirmed;
-        public event NotificationEventHandler? NotificationConfirmedDelegate;
+
+        // Event with arguments
         public event EventHandler<NotificationReceivedEventArgs>? NotificationConfirmedWithArgs;
+
+        // Event with arguments and your own delegate (we are not using the traditional EventHandler from .NET)
+        public event NotificationEventHandler? NotificationConfirmedDelegate;
         public delegate void NotificationEventHandler(object sender, NotificationReceivedEventArgs e);
         public string? Message { get; set; }
 
@@ -29,5 +34,6 @@
     public class NotificationReceivedEventArgs : EventArgs
     {
         public DateTime TimeNotificationReceived { get; set; }
+        public string? Message { get; set; }
     }
 }

@@ -11,3 +11,6 @@ Branch com anotações sobre os assuntos, exemplos de código e links úteis.
 - https://www.youtube.com/watch?v=K4xj_gjVSGw
 - https://www.youtube.com/watch?v=SuW2GwO17qA
 - https://www.youtube.com/watch?v=OWQFXFsqbDY (discute performance vs segurança e utilização de ponteiros, não é tão básico)
+
+### Extra:
+- https://www.youtube.com/watch?v=NmmpXcMxCjY (provavelmente terá uma branch sobre mediator em algum momento):
