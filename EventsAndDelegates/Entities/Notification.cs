@@ -15,11 +15,13 @@
 
         public int IdTypeNotification { get; set; }
 
+        // Here is the invocation method. Note that we pass an empty event args because this event doesn't have nothing to be passed
         public void OnNotificationReceived()
         {
             NotificationConfirmed?.Invoke(this, EventArgs.Empty);
         }
 
+        // Here are the invocation methods. Note that we pass the arguments
         public void OnNotificationReceivedWithArgs(NotificationReceivedEventArgs args)
         {
             NotificationConfirmedWithArgs?.Invoke(this, args);
@@ -31,6 +33,7 @@
         }
     }
 
+    // This is the class that we use to pass arguments to the event
     public class NotificationReceivedEventArgs : EventArgs
     {
         public DateTime TimeNotificationReceived { get; set; }
