@@ -1,5 +1,6 @@
 # Locks e Semáforos
 Branch com anotações sobre os assuntos, exemplos de código e links úteis.
+Branch with notes about the subject, code examples and useful links.
 
 ## Artigos:
 ### Locks:
@@ -16,6 +17,6 @@ Branch com anotações sobre os assuntos, exemplos de código e links úteis.
 - https://www.youtube.com/watch?v=IiI0GEsrnjw
 - 
 ### Locks:
-- https://www.youtube.com/watch?v=s8sPkO-_zwo (fala um pouco de monitoor também)
+- https://www.youtube.com/watch?v=s8sPkO-_zwo (fala um pouco de monitor também / talks about monitor too)
 ### Ambos:
-- https://www.youtube.com/watch?v=5Zv8fF-KPrE (tem alguns outros tipos de opção controle de threads também)
+- https://www.youtube.com/watch?v=5Zv8fF-KPrE (tem alguns outros tipos de opção controle de threads também / there are others threads control options in this video)
