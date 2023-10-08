@@ -1,4 +1,7 @@
-﻿namespace locks_and_semaphores
+﻿using locks_and_semaphores.Services;
+using locks_and_semaphores.Utils;
+
+namespace locks_and_semaphores
 {
     public class Program
     {
@@ -26,6 +29,9 @@
             Console.WriteLine("----------With SemaphoreSlim----------");
 
             StartThreadsWithSemaphoreSlim();
+
+            var lockService = new LockExampleService();
+            lockService.Run();
         }
 
         private static void StartThreadsWithSemaphore()
@@ -71,17 +77,17 @@
 
         private static void FakeThreadExecutionWithSemaphoreSlim(object? number)
         {
-            Console.WriteLine($"Thread {number} waiting...");
+            FakeThreadExecutionUtil.FakeWaitingThreadExecution(number, "Semaphore Slim");
             _semaphoreSlim?.Wait();
-            FakeThreadExecution(number);
+            FakeThreadExecutionUtil.FakeThreadExecution(number, "Semaphore Slim");
             _semaphoreSlim?.Release();
         }
 
         private static void FakeThreadExecutionWithSemaphore(object? number)
         {
-            Console.WriteLine($"Thread {number} waiting...");
+            FakeThreadExecutionUtil.FakeWaitingThreadExecution(number, "Semaphore");
             _semaphore?.WaitOne();
-            FakeThreadExecution(number);
+            FakeThreadExecutionUtil.FakeThreadExecution(number, "Semaphore");
             _semaphore?.Release();
         }
 
