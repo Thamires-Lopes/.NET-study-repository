@@ -28,6 +28,8 @@ namespace locks_and_semaphores.Services
             Thread.Sleep(500);
         }
 
+        // The lock instruction is always checking if another thread is running the piece of code inside it.
+        // So, it is preventing that the same piece of code is running in parallel.
         private void FakeThreadExecutionWithLock(object? number)
         {
             FakeThreadExecutionUtil.FakeWaitingThreadExecution(number, "lock");
