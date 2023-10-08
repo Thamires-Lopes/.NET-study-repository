@@ -2,7 +2,8 @@
 {
     public class Program
     {
-        private static Semaphore? semaphore;
+        private static Semaphore? _semaphore;
+        private static SemaphoreSlim? _semaphoreSlim;
 
         static void Main()
         {
@@ -17,13 +18,21 @@
             Console.WriteLine("----------With Semaphore----------");
 
             StartThreadsWithSemaphore();
+
+            Thread.Sleep(5000);
+
+            Console.WriteLine();
+
+            Console.WriteLine("----------With SemaphoreSlim----------");
+
+            StartThreadsWithSemaphoreSlim();
         }
 
         private static void StartThreadsWithSemaphore()
         {
             // The first parameter is the initial number of threads starting.
             // The second parameter is the maximum number of threads in execution.
-            semaphore = new Semaphore(2, 5);
+            _semaphore = new Semaphore(2, 5);
 
             for (int i = 0; i < 10; i++)
             {
@@ -43,12 +52,37 @@
             }
         }
 
+
+        // SemaphoresSlim is just another way to do the same thing that Semaphore already do. But it is lighter.
+        private static void StartThreadsWithSemaphoreSlim()
+        {
+            // The first parameter is the initial number of threads starting.
+            // The second parameter is the maximum number of threads in execution.
+            _semaphoreSlim = new SemaphoreSlim(2, 5);
+
+            for (int i = 0; i < 10; i++)
+            {
+                var thread = new Thread(new ParameterizedThreadStart(FakeThreadExecutionWithSemaphoreSlim));
+                thread.Start(i);
+            }
+
+            Thread.Sleep(500);
+        }
+
+        private static void FakeThreadExecutionWithSemaphoreSlim(object? number)
+        {
+            Console.WriteLine($"Thread {number} waiting...");
+            _semaphoreSlim?.Wait();
+            FakeThreadExecution(number);
+            _semaphoreSlim?.Release();
+        }
+
         private static void FakeThreadExecutionWithSemaphore(object? number)
         {
             Console.WriteLine($"Thread {number} waiting...");
-            semaphore?.WaitOne();
+            _semaphore?.WaitOne();
             FakeThreadExecution(number);
-            semaphore?.Release();
+            _semaphore?.Release();
         }
 
         private static void FakeThreadExecution(object? number)

@@ -3,11 +3,12 @@ Branch com anotações sobre os assuntos, exemplos de código e links úteis.
 
 ## Artigos:
 ### Locks:
-- https://learn.microsoft.com/pt-br/dotnet/csharp/language-reference/statements/lock
+- https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/lock
 - 
 ### Semáforos:
-- https://learn.microsoft.com/en-us/dotnet/api/system.threading.semaphore?view=net-6.0
-- https://techblog.desenvolvedores.net/2011/04/21/controlando-threads-com-semaforos-c/
+- https://learn.microsoft.com/en-us/dotnet/api/system.threading.semaphore?view=net-6.0 (Semaphore)
+- https://techblog.desenvolvedores.net/2011/04/21/controlando-threads-com-semaforos-c/ (Semaphore)
+- https://learn.microsoft.com/en-us/dotnet/api/system.threading.semaphoreslim?view=net-6.0 (SemaphoreSlim)
 
 
 ## Vídeos:
@@ -15,6 +16,6 @@ Branch com anotações sobre os assuntos, exemplos de código e links úteis.
 - https://www.youtube.com/watch?v=IiI0GEsrnjw
 - 
 ### Locks:
-- 
+- https://www.youtube.com/watch?v=s8sPkO-_zwo (fala um pouco de monitoor também)
 ### Ambos:
-- https://www.youtube.com/watch?v=5Zv8fF-KPrE
+- https://www.youtube.com/watch?v=5Zv8fF-KPrE (tem alguns outros tipos de opção controle de threads também)
