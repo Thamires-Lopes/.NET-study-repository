@@ -8,7 +8,7 @@ namespace locks_and_semaphores.Services
 
         public static void Run()
         {
-            Thread.Sleep(5000);
+            Thread.Sleep(10000);
 
             Console.WriteLine();
 

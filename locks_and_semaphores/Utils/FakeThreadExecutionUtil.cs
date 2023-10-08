@@ -5,7 +5,7 @@
         public static void FakeThreadExecution(object? number, string method)
         {
             Console.WriteLine($"Thread {number} using {method} starting...");
-            Thread.Sleep(3000);
+            Thread.Sleep(2000);
             Console.WriteLine($"Thread {number} using {method} Finishing...");
         }
 
